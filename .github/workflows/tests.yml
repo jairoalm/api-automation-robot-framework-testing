@@ -46,7 +46,7 @@ jobs:
       if: always()
       with:
         gh_access_token: ${{ secrets.GITHUB_TOKEN }}
-        report_path: logs
+        report_path: reports
 
     # bloco para gerar relatório dentro do github action 
     - name: Upload Report
@@ -55,4 +55,4 @@ jobs:
       if: always()
       with: 
         name: API Test report
-        path: logs
+        path: reports
