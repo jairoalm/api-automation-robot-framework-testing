@@ -1,28 +1,58 @@
 name: Tests API
-
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
+  # para disparo manual lá no github action
+  workflow_dispatch:
 
 jobs:
-  build:
+  API:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Get code
+      uses: actions/checkout@v4
+    # instalando o node.js
+    - name: Use Node.js 20.15
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+        node-version: 20.15
+    # instalando o python
+    - name: Setup Python 
+      uses: actions/setup-python@v5.3.0
+      with:
+        python-version: 3.13
+    # instalando as dependências do projeto 
+    - name: Install Deps
+      run: |
+        node --version
+        python --version
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run API Tests
+      # para excutar os testes atraves de tags
+      # run: robot -d ./logs -i smoke tests
+      # para excutar todos os cenários de testes
+      run: robot -d ./reports tests
+
+    # bloco para reportar relatório dos testes
+    - name: Robot Reporter
+      uses: joonvena/robotframework-reporter-action@v2.4
+      # o if é para os testes continuar mesmo ele encontrando falhas em algum cenário
+      if: always()
+      with:
+        gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+        report_path: logs
+
+    # bloco para gerar relatório dentro do github action 
+    - name: Upload Report
+      uses: actions/upload-artifact@v4.4.3
+      # o if é para gerar o relatório mesmo que um cenário de teste falhe
+      if: always()
+      with: 
+        name: API Test report
+        path: logs
