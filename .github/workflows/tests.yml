@@ -1,9 +1,9 @@
 name: Tests API
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   # para disparo manual lá no github action
   workflow_dispatch:
 
