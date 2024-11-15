@@ -37,7 +37,7 @@ jobs:
       # para excutar os testes atraves de tags
       # run: robot -d ./logs -i smoke tests
       # para excutar todos os cenários de testes
-      run: robot -d ./reports tests
+      run: robot -d ./logs tests
 
     # bloco para reportar relatório dos testes
     - name: Robot Reporter
@@ -46,7 +46,7 @@ jobs:
       if: always()
       with:
         gh_access_token: ${{ secrets.GITHUB_TOKEN }}
-        report_path: reports/logs
+        report_path: logs
 
     # bloco para gerar relatório dentro do github action 
     - name: Upload Report
@@ -55,4 +55,4 @@ jobs:
       if: always()
       with: 
         name: API Test report
-        path: reports
+        path: logs
