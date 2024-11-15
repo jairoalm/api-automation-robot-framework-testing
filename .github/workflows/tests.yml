@@ -40,13 +40,13 @@ jobs:
       run: robot -d ./reports tests
 
     # bloco para reportar relatório dos testes
-    - name: Robot Reporter
-      uses: joonvena/robotframework-reporter-action@v2.4
-      # o if é para os testes continuar mesmo ele encontrando falhas em algum cenário
-      if: always()
-      with:
-        gh_access_token: ${{ secrets.GITHUB_TOKEN }}
-        report_path: reports
+    # - name: Robot Reporter
+    #   uses: joonvena/robotframework-reporter-action@v2.4
+    #   # o if é para os testes continuar mesmo ele encontrando falhas em algum cenário
+    #   if: always()
+    #   with:
+    #     gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+    #     report_path: reports
 
     # bloco para gerar relatório dentro do github action 
     - name: Upload Report
