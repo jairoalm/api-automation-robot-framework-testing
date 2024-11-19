@@ -76,3 +76,17 @@ Conferir se o Login ocorreu com sucesso
     Log    ${RESPONSE}
     Dictionary Should Contain Item       ${RESPONSE}    message    Login realizado com sucesso
     Dictionary Should Contain Key        ${RESPONSE}    authorization
+
+Realizar Login com email inválido
+    ${body}    Create Dictionary     
+    ...    email=12355@teste.com    
+    ...    password=5789       
+    Criar Sessão na ServeRest
+    ${response}    POST On Session    alias=ServeRest    url=/login    json=${body}    expected_status=any
+
+    # Set Test Variable    ${ID_USUARIO}    ${response.json()["_id"]}
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
+Valida que usuário não esta cadastrado
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    message    Email e/ou senha inválidos
