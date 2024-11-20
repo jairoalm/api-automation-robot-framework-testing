@@ -83,10 +83,20 @@ Realizar Login com email inválido
     ...    password=5789       
     Criar Sessão na ServeRest
     ${response}    POST On Session    alias=ServeRest    url=/login    json=${body}    expected_status=any
-
-    # Set Test Variable    ${ID_USUARIO}    ${response.json()["_id"]}
     Set Test Variable    ${RESPONSE}      ${response.json()}
 
-Valida que usuário não esta cadastrado
+Campo email é obrigatorio
+    ${body}    Create Dictionary     
+    ...    email=${EMPTY}    
+    ...    password=5789       
+    Criar Sessão na ServeRest
+    ${response}    POST On Session    alias=ServeRest    url=/login    json=${body}    expected_status=any
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
+Valida que usuário não esta cadastrado "${message}"
     Log    ${RESPONSE}
-    Dictionary Should Contain Item       ${RESPONSE}    message    Email e/ou senha inválidos
+    Dictionary Should Contain Item       ${RESPONSE}    message    ${message}
+
+Verifica se campo email foi preenchido "${message}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    email    ${message}

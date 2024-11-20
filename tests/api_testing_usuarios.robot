@@ -28,7 +28,15 @@ Cenário 04: Logar com o novo usuário criado
     Conferir se o Login ocorreu com sucesso
 
 Cenário 05: Logar com e-mail não cadastrado
+    [Tags]    required
     Criar um usuário novo
     Cadastrar o usuário criado na ServeRest  email=${EMAIL_TEST}  status_code=201
     Realizar Login com email inválido
-    Valida que usuário não esta cadastrado
+    Valida que usuário não esta cadastrado "Email e/ou senha inválidos"
+
+Cenário 06: Logar sem informar e-mail
+    [Tags]    required
+    Criar um usuário novo
+    Cadastrar o usuário criado na ServeRest  email=${EMAIL_TEST}  status_code=201
+    Campo email é obrigatorio
+    Verifica se campo email foi preenchido "email não pode ficar em branco"
