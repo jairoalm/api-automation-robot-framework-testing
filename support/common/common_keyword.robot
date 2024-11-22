@@ -26,3 +26,7 @@ DELETE Endpoint na api "${route}"
 
 Validar Status Code "${statuscode}"
     Status Should Be    ${statuscode}
+
+Cadastrar um novo usuário
+    Criar um usuário novo
+    Cadastrar o usuário criado na ServeRest  email=${EMAIL_TEST}  status_code=201
