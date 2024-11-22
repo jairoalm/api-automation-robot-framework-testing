@@ -39,6 +39,68 @@ Conferir se o usuário foi cadastrado corretamente
 Vou repetir o cadastro do usuário
     Cadastrar o usuário criado na ServeRest    ${EMAIL_TEST}    status_code=400
 
+Cadstrar novo usuario sem informar nome
+    ${body}    Create Dictionary    
+    ...    nome=${EMPTY}    
+    ...    email=fulano@teste.com.br    
+    ...    password=5789    
+    ...    administrador=true
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    POST Endpoint na api "/usuarios"
+    Log    ${response.json()}
+    IF  ${response.status_code} == 201
+        Set Test Variable    ${ID_USUARIO}    ${response.json()["_id"]}        
+    END    
+    Set Test Variable    ${RESPONSE}      ${response.json()} 
+
+Cadstrar novo usuario com email inválido
+    [Arguments]    ${email}
+    ${body}    Create Dictionary    
+    ...    nome=Usuario sem email    
+    ...    email=${email}    
+    ...    password=5789    
+    ...    administrador=true
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    POST Endpoint na api "/usuarios"
+    Log    ${response.json()}
+    IF  ${response.status_code} == 201
+        Set Test Variable    ${ID_USUARIO}    ${response.json()["_id"]}        
+    END    
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
+Cadstrar novo usuario sem informar senha
+    ${body}    Create Dictionary    
+    ...    nome=Usuario sem email    
+    ...    email=testet@teste.com.br    
+    ...    password=${EMPTY}    
+    ...    administrador=true
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    POST Endpoint na api "/usuarios"
+    Log    ${response.json()}
+    IF  ${response.status_code} == 201
+        Set Test Variable    ${ID_USUARIO}    ${response.json()["_id"]}        
+    END    
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
+Cadstrar novo usuario com administrador invalido
+    [Arguments]    ${adm}
+    ${body}    Create Dictionary    
+    ...    nome=Usuario sem email    
+    ...    email=testet@teste.com.br    
+    ...    password=12356   
+    ...    administrador=${adm}
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    POST Endpoint na api "/usuarios"
+    Log    ${response.json()}
+    IF  ${response.status_code} == 201
+        Set Test Variable    ${ID_USUARIO}    ${response.json()["_id"]}        
+    END    
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
 Verificar se a API não permitiu o cadastro repetido
     Log    ${RESPONSE}
     Dictionary Should Contain Item       ${RESPONSE}    message    Este email já está sendo usado    
@@ -60,3 +122,7 @@ Conferir os dados do novo usuario
     Dictionary Should Contain Item    ${RESPONSE_CONSULTA}    password           5789
     Dictionary Should Contain Item    ${RESPONSE_CONSULTA}    administrador      true
     Dictionary Should Contain Item    ${RESPONSE_CONSULTA}    _id                ${ID_USUARIO}
+
+Verifica se campo administrador foi preenchido corretamente "${administrador}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    administrador    ${administrador}

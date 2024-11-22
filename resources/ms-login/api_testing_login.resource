@@ -64,15 +64,3 @@ Informar senha inválida
     Criar Sessão na ServeRest
     POST Endpoint na api "/login"
     Set Test Variable    ${RESPONSE}      ${response.json()}
-
-Valida que usuário não esta cadastrado "${message}"
-    Log    ${RESPONSE}
-    Dictionary Should Contain Item       ${RESPONSE}    message    ${message}
-
-Verifica se campo email foi preenchido corretamente "${message}"
-    Log    ${RESPONSE}
-    Dictionary Should Contain Item       ${RESPONSE}    email    ${message}
-
-Verifica se campo senha foi preenchido corretamente "${password}"
-    Log    ${RESPONSE}
-    Dictionary Should Contain Item       ${RESPONSE}    password    ${password}

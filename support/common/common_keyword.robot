@@ -30,3 +30,19 @@ Validar Status Code "${statuscode}"
 Cadastrar um novo usuário
     Criar um usuário novo
     Cadastrar o usuário criado na ServeRest  email=${EMAIL_TEST}  status_code=201
+
+Valida que usuário não esta cadastrado "${message}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    message    ${message}
+
+Verifica se campo email foi preenchido corretamente "${email}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    email    ${email}
+
+Verifica se campo senha foi preenchido corretamente "${password}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    password    ${password}
+
+Verifica se campo nome foi preenchido corretamente "${name}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    nome    ${name}
