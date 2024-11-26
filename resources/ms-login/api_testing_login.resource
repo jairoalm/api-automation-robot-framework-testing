@@ -14,6 +14,7 @@ Realizar Login com o usuário
     Criar Sessão na ServeRest
     POST Endpoint na api "/login"
     Set Test Variable    ${RESPONSE}      ${response.json()}
+    Set Global Variable    ${AUTHORIZATION}     ${RESPONSE["authorization"]}
 
 Conferir se o Login ocorreu com sucesso    
     Log    ${RESPONSE}

@@ -7,6 +7,7 @@ Library            Collections
 Resource        ../resources/ms-usuarios/api_testing_usuarios.resource
 Resource        ../resources/ms-login//api_testing_login.resource
 Resource        ../support/common/common_keyword.robot
+Resource        ../resources/ms-produtos/api_testing_produtos.resource
 
 *** Keywords ***
 Criar Sessão na ServeRest
