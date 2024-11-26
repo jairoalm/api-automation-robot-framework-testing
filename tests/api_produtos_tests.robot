@@ -10,4 +10,5 @@ Cenário 01: Cadastrar um novo produto na ServeRest
     Cadastrar um novo usuário
     Realizar Login com o usuário
     Cadastrar um produto criado na ServeRest
-    Valida que usuário não esta cadastrado "Cadastro realizado com sucesso"
+    Valida mensagem de cadastrado "Cadastro realizado com sucesso"
+    # DELETE cadastro com autenticacao    /produtos    ${ID}

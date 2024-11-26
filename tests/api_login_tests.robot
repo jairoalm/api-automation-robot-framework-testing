@@ -15,7 +15,7 @@ Cenário 02: Logar com e-mail não cadastrado
     [Tags]    required
     Cadastrar um novo usuário
     Realizar Login com email inválido
-    Valida que usuário não esta cadastrado "Email e/ou senha inválidos"
+    Valida mensagem de cadastrado "Email e/ou senha inválidos"
 
 Cenário 03: Logar sem informar e-mail
     [Tags]    required
@@ -41,4 +41,4 @@ Cenário 06: Realizar login com senha inválida
     Cadastrar um novo usuário
     Informar senha inválida
     Validar Status Code "401"
-    Valida que usuário não esta cadastrado "Email e/ou senha inválidos"
+    Valida mensagem de cadastrado "Email e/ou senha inválidos"

@@ -30,6 +30,13 @@ Fazer uma chamada POST com autenticacao na rota "${route}"
     Log To Console         Response: ${response.content}
     Set Global Variable    ${response}
 
+DELETE cadastro com autenticacao
+    [Arguments]    ${route}    ${ID}
+    ${header}              Create Dictionary    authorization=${AUTHORIZATION}
+    ${response}            DELETE On Session    alias=ServeRest    url=${route}/${ID}    json=${body}    expected_status=ANY   verify=${False}    headers=${header}
+    Log To Console         Response: ${response.content}
+    Set Global Variable    ${response}
+
 Validar Status Code "${statuscode}"
     Status Should Be    ${statuscode}
 
@@ -37,7 +44,7 @@ Cadastrar um novo usuário
     Criar um usuário novo
     Cadastrar o usuário criado na ServeRest  email=${EMAIL_TEST}  status_code=201
 
-Valida que usuário não esta cadastrado "${message}"
+Valida mensagem de cadastrado "${message}"
     Log    ${RESPONSE}
     Dictionary Should Contain Item       ${RESPONSE}    message    ${message}
 

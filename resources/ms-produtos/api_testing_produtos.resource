@@ -9,7 +9,18 @@ Resource    ../../support/base.robot
 
 *** Keywords ***
 Cadastrar um produto criado na ServeRest
-    [Arguments]
+    ${body}    Create Dictionary    
+    ...    nome=teste produto 012  
+    ...    preco=12    
+    ...    descricao=TV 29 polegadas    
+    ...    quantidade=10
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    Fazer uma chamada POST com autenticacao na rota "/produtos"
+    Log    ${response.json()}
+    Set Test Variable    ${ID}    ${response.json()["_id"]}
+
+Vou repetir um cadastro de produto
     ${body}    Create Dictionary    
     ...    nome=Televisão    
     ...    preco=12    
