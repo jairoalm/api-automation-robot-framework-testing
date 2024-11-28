@@ -9,8 +9,10 @@ Resource    ../../support/base.robot
 
 *** Keywords ***
 Cadastrar um produto criado na ServeRest
+    ${NOME}    Generate Random String    length=4    chars=[LETTERS]
+    ${NOME}    Convert To Lower Case    ${NOME} 
     ${body}    Create Dictionary    
-    ...    nome=teste produto 012  
+    ...    nome=${NOME}  
     ...    preco=12    
     ...    descricao=TV 29 polegadas    
     ...    quantidade=10
@@ -19,10 +21,11 @@ Cadastrar um produto criado na ServeRest
     Fazer uma chamada POST com autenticacao na rota "/produtos"
     Log    ${response.json()}
     Set Test Variable    ${ID}    ${response.json()["_id"]}
+    Set Test Variable    ${RESPONSE}      ${response.json()}
 
 Vou repetir um cadastro de produto
     ${body}    Create Dictionary    
-    ...    nome=Televisão    
+    ...    nome=yetw    
     ...    preco=12    
     ...    descricao=TV 29 polegadas    
     ...    quantidade=10
@@ -30,6 +33,57 @@ Vou repetir um cadastro de produto
     Criar Sessão na ServeRest
     Fazer uma chamada POST com autenticacao na rota "/produtos"
     Log    ${response.json()}
+    Set Test Variable    ${RESPONSE}      ${response.json()} 
+
+Cadastrar sem nome do produto
+    ${body}    Create Dictionary    
+    ...    nome=${EMPTY}   
+    ...    preco=12    
+    ...    descricao=TV 29 polegadas    
+    ...    quantidade=10
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    Fazer uma chamada POST com autenticacao na rota "/produtos"
+    Log    ${response.json()}
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
+Cadastrar sem preço do produto
+    ${body}    Create Dictionary    
+    ...    nome=Produto   
+    ...    preco=${null}   
+    ...    descricao=TV 29 polegadas     
+    ...    quantidade=12
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    Fazer uma chamada POST com autenticacao na rota "/produtos"
+    Log    ${response.json()}
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
+Cadastrar sem descricao do produto
+    ${body}    Create Dictionary    
+    ...    nome=Produto   
+    ...    preco=20    
+    ...    descricao=${EMPTY}    
+    ...    quantidade=10
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    Fazer uma chamada POST com autenticacao na rota "/produtos"
+    Log    ${response.json()}
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
+
+Cadastrar sem quantidade do produto
+    ${body}    Create Dictionary    
+    ...    nome=Produto   
+    ...    preco=20    
+    ...    descricao=TV 29 polegadas     
+    ...    quantidade=${null}
+    Set Global Variable                ${body}    
+    Criar Sessão na ServeRest
+    Fazer uma chamada POST com autenticacao na rota "/produtos"
+    Log    ${response.json()}
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+
 
 Consultar os dados do novo produto
     GET Endpoint na api "/usuarios"

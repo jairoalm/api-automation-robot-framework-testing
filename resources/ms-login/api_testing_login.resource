@@ -16,6 +16,16 @@ Realizar Login com o usuário
     Set Test Variable    ${RESPONSE}      ${response.json()}
     Set Global Variable    ${AUTHORIZATION}     ${RESPONSE["authorization"]}
 
+Realizar login com usuário existente
+    ${body}    Create Dictionary     
+    ...    email=hqms@mailsac.com    
+    ...    password=5789
+    Set Global Variable                ${body}       
+    Criar Sessão na ServeRest
+    POST Endpoint na api "/login"
+    Set Test Variable    ${RESPONSE}      ${response.json()}
+    Set Global Variable    ${AUTHORIZATION}     ${RESPONSE["authorization"]}    
+
 Conferir se o Login ocorreu com sucesso    
     Log    ${RESPONSE}
     Dictionary Should Contain Item       ${RESPONSE}    message    Login realizado com sucesso

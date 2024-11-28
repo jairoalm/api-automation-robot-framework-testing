@@ -45,12 +45,12 @@ Cadastrar um novo usuário
     Cadastrar o usuário criado na ServeRest  email=${EMAIL_TEST}  status_code=201
 
 Valida mensagem de cadastrado "${message}"
-    Log    ${RESPONSE}
-    Dictionary Should Contain Item       ${RESPONSE}    message    ${message}
+    Log    ${message}
+    Dictionary Should Contain Item    ${RESPONSE}    message    ${message}
 
 Verifica se campo email foi preenchido corretamente "${email}"
     Log    ${RESPONSE}
-    Dictionary Should Contain Item       ${RESPONSE}    email    ${email}
+    Dictionary Should Contain Item    ${RESPONSE}    email    ${email}
 
 Verifica se campo senha foi preenchido corretamente "${password}"
     Log    ${RESPONSE}
@@ -59,3 +59,15 @@ Verifica se campo senha foi preenchido corretamente "${password}"
 Verifica se campo nome foi preenchido corretamente "${name}"
     Log    ${RESPONSE}
     Dictionary Should Contain Item       ${RESPONSE}    nome    ${name}
+
+Verifica se campo descricao foi preenchido corretamente "${descricao}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    descricao    ${descricao}
+
+Verifica se campo quantidade foi preenchido corretamente "${quantidade}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    quantidade    ${quantidade}
+
+Verifica se campo preço foi preenchido corretamente "${preco}"
+    Log    ${RESPONSE}
+    Dictionary Should Contain Item       ${RESPONSE}    preco    ${preco}
