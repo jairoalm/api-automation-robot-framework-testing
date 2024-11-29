@@ -9,13 +9,9 @@ POST Endpoint na api "${route}"
     Log To Console    Response: ${response.content}
     Set Test Variable    ${response}
 
-GET Endpoint na api "${route}"
+GET Endpoint na api
+    [Arguments]    ${route}
     ${response}            GET On Session    alias=ServeRest    url=${route}   expected_status=ANY   verify=${False}
-    Log To Console         Response: ${response.content}
-    Set Global Variable    ${response}
-
-PUT Endpoint na api "${route}"
-    ${response}            PUT On Session    alias=ServeRest    url=&{route}/${ID}    json=${body}    expected_status=ANY   verify=${False}
     Log To Console         Response: ${response.content}
     Set Global Variable    ${response}
 
@@ -32,7 +28,15 @@ Fazer uma chamada POST com autenticacao na rota "${route}"
 
 Fazer uma chamada GET com autenticacao na rota
     [Arguments]    ${route}
-    ${response}            GET On Session    alias=ServeRest    url=${route}   expected_status=ANY   verify=${False}
+    ${header}              Create Dictionary    authorization=${AUTHORIZATION}
+    ${response}            GET On Session    alias=ServeRest    url=${route}   expected_status=ANY   verify=${False}    headers=${header}
+    Log To Console         Response: ${response.content}
+    Set Global Variable    ${response}
+
+PUT Endpoint na api
+    [Arguments]    ${route}
+    ${header}              Create Dictionary    authorization=${AUTHORIZATION}
+    ${response}            PUT On Session    alias=ServeRest    url=&{route}   json=${body}    expected_status=ANY   verify=${False}    headers=${header}
     Log To Console         Response: ${response.content}
     Set Global Variable    ${response}
 

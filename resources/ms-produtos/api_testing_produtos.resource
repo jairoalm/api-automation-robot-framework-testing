@@ -25,10 +25,10 @@ Cadastrar um produto criado na ServeRest
 
 Vou repetir um cadastro de produto
     ${body}    Create Dictionary    
-    ...    nome=yetw    
-    ...    preco=12    
-    ...    descricao=TV 29 polegadas    
-    ...    quantidade=10
+    ...    nome=Samsung 60 polegadas    
+    ...    preco=5240    
+    ...    descricao=TV 
+    ...    quantidade=49974
     Set Global Variable                ${body}    
     Criar Sessão na ServeRest
     Fazer uma chamada POST com autenticacao na rota "/produtos"
@@ -86,7 +86,7 @@ Cadastrar sem quantidade do produto
 
 
 Consultar os dados do novo produto
-    GET Endpoint na api "/produtos"
+    GET Endpoint na api     /produtos
     Log      ${response.status_code}
     Log      ${response.reason}
     Log      ${response.headers}
@@ -96,5 +96,23 @@ Consultar os dados do novo produto
     Set Test Variable    ${RESPONSE_CONSULTA}    ${response.json()}
 
 Buscar por ID os produtos cadastrados
-    ${data}    Get json fixture    produtos_dados    produtos
-    Fazer uma chamada GET com autenticacao na rota    /produtos/${data}[produtos][_id]
+    Realizar login com usuário existente
+    Cadastrar um produto criado na ServeRest
+    Fazer uma chamada GET com autenticacao na rota    /produtos/${ID}
+
+Criar payload
+    [Arguments]    ${body}
+    Log    ${body}
+    ${body}    Create Dictionary    
+    ...        nome=${body["nome"]}  
+    ...        preco=${body["preco"]}     
+    ...        descricao=${body["descricao"]}    
+    ...        quantidade=${body["quantidade"]}
+    PUT Endpoint na api    /produtos/${ID} 
+    
+
+Fazer edição de um produto cadastrado
+    Realizar login com usuário existente
+    Cadastrar um produto criado na ServeRest
+    Criar payload    ${body}
+    

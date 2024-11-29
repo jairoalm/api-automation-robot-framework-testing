@@ -3,6 +3,8 @@ Documentation           Suite de teste de Login
 
 Resource                ../support/base.robot
 
+Suite Setup        Criar Sessão na ServeRest
+
 
 *** Test Cases ***
 Cenário 01: Cadastrar um novo produto na ServeRest
@@ -38,12 +40,34 @@ Cenário 06: Cadastro de produto sem informar quantidade
     Cadastrar sem quantidade do produto 
     Verifica se campo quantidade foi preenchido corretamente "quantidade deve ser um número"
 
-Cenário 07: Listar produtos cadastrados
+Cenário 07: Listar todos produtos cadastrados
+    [Tags]    search
+    GET Endpoint na api    /produtos?nome=Samsung 60 polegadas
     Consultar os dados do novo produto
     Validar Status Code "200"
 
-# Cenário 08: Listar produto por ID
-#     [Tags]    b
-    # Buscar por ID os produtos cadastrados
-    # Validar Status Code "200"
-    
+Cenário 08: Listar produto por nome cadastrado
+    [Tags]    search
+    GET Endpoint na api    /produtos?nome=Samsung 60 polegadas
+    Consultar os dados do novo produto
+    Validar Status Code "200"
+
+Cenário 09: Listar produto por preco cadastrado
+    [Tags]    search
+    GET Endpoint na api    /produtos?preco=5240
+    Consultar os dados do novo produto
+    Validar Status Code "200"
+Cenário 10: Listar produto por descrição cadastrada
+    [Tags]    search
+    GET Endpoint na api    /produtos?descricao=TV
+    Consultar os dados do novo produto
+    Validar Status Code "200"
+Cenário 11: Listar produto por quantidade cadastrado
+    [Tags]    search
+    GET Endpoint na api    /produtos?quantidade=49974
+    Consultar os dados do novo produto
+    Validar Status Code "200"
+Cenário 12: Listar produto por ID
+    [Tags]    search
+    Buscar por ID os produtos cadastrados
+    Validar Status Code "200"

@@ -18,7 +18,7 @@ Criar Sessão na ServeRest
 
 Get json fixture
     [Arguments]    ${file_name}        ${scenario}
-    ${file}        Get File    ${EXECDIR}/resources/fixtures/${file_name}    
+    ${file}        Get Binary File    ${EXECDIR}/resources/fixtures/${file_name}    
     ${data}        Evaluate    json.loads('''${file}''')    json
     RETURN        ${data}[${scenario}]
 

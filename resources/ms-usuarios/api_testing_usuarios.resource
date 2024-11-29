@@ -106,7 +106,7 @@ Verificar se a API não permitiu o cadastro repetido
     Dictionary Should Contain Item       ${RESPONSE}    message    Este email já está sendo usado    
 
 Consultar os dados do novo usuario
-    Fazer uma chamada GET com autenticacao na rota "/usuarios"
+    GET Endpoint na api    /usuarios/${ID}
     Log      ${response.status_code}
     Log      ${response.reason}
     Log      ${response.headers}
@@ -121,7 +121,7 @@ Conferir os dados do novo usuario
     Dictionary Should Contain Item    ${RESPONSE_CONSULTA}    email              ${EMAIL_TEST}
     Dictionary Should Contain Item    ${RESPONSE_CONSULTA}    password           5789
     Dictionary Should Contain Item    ${RESPONSE_CONSULTA}    administrador      true
-    Dictionary Should Contain Item    ${RESPONSE_CONSULTA}    _id                ${ID_USUARIO}
+    Dictionary Should Contain Item    ${RESPONSE_CONSULTA}    _id                ${ID}
 
 Verifica se campo administrador foi preenchido corretamente "${administrador}"
     Log    ${RESPONSE}

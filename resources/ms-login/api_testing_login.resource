@@ -18,8 +18,8 @@ Realizar Login com o usuário
 
 Realizar login com usuário existente
     ${body}    Create Dictionary     
-    ...    email=hqms@mailsac.com    
-    ...    password=5789
+    ...    email=fulano@qa.com    
+    ...    password=teste
     Set Global Variable                ${body}       
     Criar Sessão na ServeRest
     POST Endpoint na api "/login"
