@@ -27,7 +27,7 @@ Cadastrar o usuário criado na ServeRest
     POST Endpoint na api "/usuarios"
     Log    ${response.json()}
     IF  ${response.status_code} == 201
-        Set Test Variable    ${ID_USUARIO}    ${response.json()["_id"]}        
+        Set Test Variable    ${ID}    ${response.json()["_id"]}        
     END    
     Set Test Variable    ${RESPONSE}      ${response.json()}    
 
@@ -106,7 +106,7 @@ Verificar se a API não permitiu o cadastro repetido
     Dictionary Should Contain Item       ${RESPONSE}    message    Este email já está sendo usado    
 
 Consultar os dados do novo usuario
-    GET Endpoint na api "/usuarios"
+    Fazer uma chamada GET com autenticacao na rota "/usuarios"
     Log      ${response.status_code}
     Log      ${response.reason}
     Log      ${response.headers}

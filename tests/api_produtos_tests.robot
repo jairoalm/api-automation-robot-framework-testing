@@ -21,7 +21,7 @@ Cenário 02: Duplicar cadastro de produto
 Cenário 03: Cadastro de produto sem informar nome
     Realizar login com usuário existente
     Cadastrar sem nome do produto
-   Verifica se campo nome foi preenchido corretamente "nome não pode ficar em branco"
+    Verifica se campo nome foi preenchido corretamente "nome não pode ficar em branco"
 
 Cenário 04: Cadastro de produto sem informar preço
     Realizar login com usuário existente
@@ -37,3 +37,13 @@ Cenário 06: Cadastro de produto sem informar quantidade
     Realizar login com usuário existente
     Cadastrar sem quantidade do produto 
     Verifica se campo quantidade foi preenchido corretamente "quantidade deve ser um número"
+
+Cenário 07: Listar produtos cadastrados
+    Consultar os dados do novo produto
+    Validar Status Code "200"
+
+# Cenário 08: Listar produto por ID
+#     [Tags]    b
+    # Buscar por ID os produtos cadastrados
+    # Validar Status Code "200"
+    

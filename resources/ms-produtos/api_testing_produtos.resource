@@ -86,7 +86,7 @@ Cadastrar sem quantidade do produto
 
 
 Consultar os dados do novo produto
-    GET Endpoint na api "/usuarios"
+    GET Endpoint na api "/produtos"
     Log      ${response.status_code}
     Log      ${response.reason}
     Log      ${response.headers}
@@ -94,3 +94,7 @@ Consultar os dados do novo produto
     Log      ${response.elapsed}
     Log      ${response.json()}
     Set Test Variable    ${RESPONSE_CONSULTA}    ${response.json()}
+
+Buscar por ID os produtos cadastrados
+    ${data}    Get json fixture    produtos_dados    produtos
+    Fazer uma chamada GET com autenticacao na rota    /produtos/${data}[produtos][_id]
