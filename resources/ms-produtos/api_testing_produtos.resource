@@ -100,7 +100,7 @@ Buscar por ID os produtos cadastrados
     Cadastrar um produto criado na ServeRest
     Fazer uma chamada GET com autenticacao na rota    /produtos/${ID}
 
-Criar payload
+Criar payload do produto
     [Arguments]    ${body}
     Log    ${body}
     ${body}    Create Dictionary    
@@ -114,5 +114,5 @@ Criar payload
 Fazer edição de um produto cadastrado
     Realizar login com usuário existente
     Cadastrar um produto criado na ServeRest
-    Criar payload    ${body}
+    Criar payload do produto    ${body}
     
