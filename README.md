@@ -8,8 +8,8 @@ O ServeRest é uma API REST gratuita que simula uma loja virtual com intuito de 
 - <a href="#tecnologias">Tecnologias Utilizadas</a>
 - <a href="#bibliotecas">Bibliotecas Existentes no Projeto</a>
 - <a href="#dependencias">Instalção de Dependências</a>
-- <a href="rodar">Como Executar o Projeto</a>
-- <a href="pessoas">Autores</a>
+- <a href="#rodar">Como Executar o Projeto</a>
+- <a href="#pessoas">Autores</a>
 
 ## Funcionalidades do Projeto
 - [x] Cadastro de Usuário
