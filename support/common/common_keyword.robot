@@ -24,7 +24,7 @@ Fazer uma chamada POST com autenticacao na rota "${route}"
     ${header}              Create Dictionary    authorization=${AUTHORIZATION}
     ${response}            POST On Session    alias=ServeRest    url=${route}    json=${body}    expected_status=ANY   verify=${False}    headers=${header}
     Log To Console         Response: ${response.content}
-    Set Global Variable    ${response}
+    Set Global Variable    ${response}      
 
 Fazer uma chamada GET com autenticacao na rota
     [Arguments]    ${route}
@@ -55,7 +55,7 @@ Cadastrar um novo usuário
     Cadastrar o usuário criado na ServeRest  email=${EMAIL_TEST}  status_code=201
 
 Valida mensagem de cadastrado "${message}"
-    Log    ${message}
+    Log    ${RESPONSE}    
     Dictionary Should Contain Item    ${RESPONSE}    message    ${message}
 
 Verifica se campo email foi preenchido corretamente "${email}"

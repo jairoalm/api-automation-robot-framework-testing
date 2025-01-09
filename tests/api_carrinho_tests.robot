@@ -2,6 +2,7 @@
 Documentation               Testes das ações do carrinho de compras
 
 Resource            ../support/base.robot
+Resource            ../resources/ms-carrinho/api_testing_carrinho.resource
 
 Suite Setup        Criar Sessão na ServeRest
 
@@ -12,16 +13,9 @@ Cenário 01: Adicionar no produto ao carrinho
     Cadastrar um novo usuário
     Realizar Login com o usuário
     Cadastrar um produto criado na ServeRest
-    ${body}    Create Dictionary
-    ...        idProduto=${ID}
-    ...        quantidade=2
-    ...    
-    ${produtos}   Create List          ${body}
-    ${payload}    Create Dictionary    produtos=${produtos}
-    Set Global Variable    ${payload}
-    Fazer uma chamada POST com autenticacao na rota "/carrinhos"
+    Adicionar produtos no carrinho    
     Validar Status Code "201"
-    Valida mensagem de cadastrado "Cadastro realizado com sucesso"
+    Valida mensagem do carrinho de produto "Cadastro realizado com sucesso"
 
 
 Cenário 01: Listar todos carrinhos cadastrados
